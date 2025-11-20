@@ -28,10 +28,9 @@ namespace MyApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(EmployeeMdl emb)
         {
-            if (ModelState.IsValid)
-            {
+            if (!ModelState.IsValid)            
                 return BadRequest(new { Message = "Invalid Data" });
-            }
+            
             await _context.Employees.AddAsync(emb);
             await _context.SaveChangesAsync();
             return Ok(new { Message = "Employee Added Successfully" });
